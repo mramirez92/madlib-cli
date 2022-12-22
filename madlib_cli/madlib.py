@@ -26,6 +26,33 @@ if __name__ == "__main__":
     print(read_template(path))
 
 
+def greeting():
+    print("Welcome to Madlibs: a game where you use random words and insert them into a story")
+
+greeting()
+
+
+user_words = []
+
+def user_input():
+    adjective_one = input("Please enter an adjective and press enter: ")
+    adjective_two = input("Please enter another adjective and press enter: ")
+    noun = input("Please enter a noun and enter: ")
+    user_words.extend((adjective_one, adjective_two, noun))
+
+
+user_input()
+print(user_words)
+
+
+
+
+
+
+
+
+# user_input()
+
 
 
 
