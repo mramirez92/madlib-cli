@@ -29,29 +29,31 @@ if __name__ == "__main__":
 def greeting():
     print("Welcome to Madlibs: a game where you use random words and insert them into a story")
 
+
 greeting()
 
+template = read_template('../assets/dark_and_stormy_night_template.txt')
+
+
+string, parts = parse_template(template)
 
 user_words = []
 
-def user_input():
-    adjective_one = input("Please enter an adjective and press enter: ")
-    adjective_two = input("Please enter another adjective and press enter: ")
-    noun = input("Please enter a noun and enter: ")
-    user_words.extend((adjective_one, adjective_two, noun))
+
+for word in parts:
+    word_input = input("Please enter a enter a word > ")
+    user_words.append(word_input)
 
 
-user_input()
-print(user_words)
+madlib = merge(string, user_words)
 
 
+with open("../assets/new_file.txt", 'w') as ff:
+    ff.write(madlib)
 
 
+print(f"You created this madlib: {madlib}")
 
-
-
-
-# user_input()
 
 
 
