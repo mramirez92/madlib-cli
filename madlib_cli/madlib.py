@@ -11,15 +11,12 @@ def read_template(file_location):
 
 
 def parse_template(string):
-    # new_string = string
 
     parts = tuple(re.findall(r"\{(.*?)}", string))
     print(parts)
     for words in parts:
-        # string = re.sub(r"\{(.*?)}", "{}", new_string)
         string = string.replace(words, "")
-
-    # print(string, parts)
+       
     return string, parts
 
 
