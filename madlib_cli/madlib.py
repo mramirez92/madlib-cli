@@ -1,64 +1,57 @@
 import re
+import sys
 
 
 def read_template(file_location):
-    with open(file_location, 'r') as f:
-        contents = f.read()
-        return contents
+    try:
+        with open(file_location, 'r') as f:
+            return f.read()
+    except FileNotFoundError as Error_in_file:
+        raise Error_in_file
 
 
 def parse_template(string):
-    new_string = string
+    # new_string = string
 
-    parts = tuple(re.findall(r"\{(.*?)}", new_string))
-    string = re.sub(r"\{(.*?)}", "{}", new_string)
+    parts = tuple(re.findall(r"\{(.*?)}", string))
+    print(parts)
+    for words in parts:
+        # string = re.sub(r"\{(.*?)}", "{}", new_string)
+        string = string.replace(words, "")
 
-    print(string, parts)
+    # print(string, parts)
     return string, parts
 
 
 def merge(str, tuple):
-  return str.format(*tuple)
+    return str.format(*tuple)
+
+
+def mad_lib():
+    print("Welcome to Madlibs: a game where you use random words and insert them into a story.\n")
+
+    template = read_template('./assets/make_me_a_video_game_template.txt')
+
+    string, parts = parse_template(template)
+
+    user_words = []
+
+    for word in parts:
+        word_input = input(f"Please enter {word} > ")
+        user_words.append(word_input)
+
+    madlib = merge(string, user_words)
+    print(f"\nYou created this madlib: {madlib}")
+    with open("./assets/new_file.txt", 'w') as ff:
+        ff.write(madlib)
+
+
+def game_exit():
+    print("\nThanks for playing!\n")
+    exit()
 
 
 if __name__ == "__main__":
-    path = 'assets/dark_and_stormy_night_template.txt'
-    print(read_template(path))
-
-
-def greeting():
-    print("Welcome to Madlibs: a game where you use random words and insert them into a story")
-
-
-greeting()
-
-template = read_template('../assets/dark_and_stormy_night_template.txt')
-
-
-string, parts = parse_template(template)
-
-user_words = []
-
-
-for word in parts:
-    word_input = input("Please enter a enter a word > ")
-    user_words.append(word_input)
-
-
-madlib = merge(string, user_words)
-
-
-with open("../assets/new_file.txt", 'w') as ff:
-    ff.write(madlib)
-
-
-print(f"You created this madlib: {madlib}")
-
-
-
-
-
-
-
-
+    mad_lib()
+    game_exit()
 
